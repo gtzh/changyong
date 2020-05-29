@@ -3,6 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String
 
 uri = "mysql+pymysql://bttzh:bttzh664956@tttzh.f3322.net:13306/bthome?charset=utf8mb4&binary_prefix=true"
 Base = declarative_base()
@@ -21,4 +22,10 @@ class User(Base):
         return "<User(name='%s', fullname='%s', nickname='%s')>" % (self.name, self.fullname, self.nickname)
     
 
-
+ed_user = User(name='ed', fullname='Ed Jones', nickname='edsnickname')
+# session.add_all([
+#     User(name='wendy', fullname='Wendy Williams', nickname='windy'),
+#     User(name='mary', fullname='Mary Contrary', nickname='mary'),
+#     User(name='fred', fullname='Fred Flintstone', nickname='freddy')
+# ])
+# session.commit()
