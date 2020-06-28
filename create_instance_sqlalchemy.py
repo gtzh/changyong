@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
+from sqlalchemy.orm import relationship                                                 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -18,14 +19,18 @@ class User(Base):
     fullname = Column(String(50))
     nickname = Column(String(50))
 
+    addreses = relationship("Address", back_populates='user', cascade="all, delete, delete-orphan")
+
     def __repr__(self):
         return "<User(name='%s', fullname='%s', nickname='%s')>" % (self.name, self.fullname, self.nickname)
-    
 
-ed_user = User(name='ed', fullname='Ed Jones', nickname='edsnickname')
+#insert 数据
+# ed_user = User(name='ed', fullname='Ed Jones', nickname='edsnickname')
+# session.add(ed_user)
 # session.add_all([
 #     User(name='wendy', fullname='Wendy Williams', nickname='windy'),
 #     User(name='mary', fullname='Mary Contrary', nickname='mary'),
 #     User(name='fred', fullname='Fred Flintstone', nickname='freddy')
 # ])
-# session.commit()
+session.commit()
+Base.metadata.create_all(engine)                                                        
